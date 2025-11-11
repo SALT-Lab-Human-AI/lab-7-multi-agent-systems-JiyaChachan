@@ -15,14 +15,26 @@ Agents:
 2. HotelAgent - Accommodation Specialist (finds real hotels)
 3. ItineraryAgent - Travel Planner (creates realistic itineraries)
 4. BudgetAgent - Financial Advisor (analyzes real costs)
+
+Configuration:
+- Uses shared configuration from the root .env file
+- Environment variables set in /Users/pranavhharish/Desktop/IS-492/multi-agent/.env
 """
 
 import os
+import sys
 import json
+from pathlib import Path
 from datetime import datetime
 from crewai import Agent, Task, Crew
 from crewai_tools import tool
 import requests
+
+# Add parent directory to path to import shared_config
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+# Import shared configuration
+from shared_config import Config, validate_config
 
 
 # ============================================================================
@@ -287,9 +299,19 @@ def main():
     print("Planning a 5-Day Trip to Iceland")
     print("=" * 80)
     print()
+
+    # Validate configuration before proceeding
+    print("🔍 Validating configuration...")
+    if not validate_config():
+        print("❌ Configuration validation failed. Please set up your .env file.")
+        exit(1)
+
+    print("✅ Configuration validated successfully!")
+    print()
+    Config.print_summary()
+    print()
     print("⚠️  IMPORTANT: This version uses REAL OpenAI API calls and web search")
     print("    Agents will research actual current prices and real information")
-    print("    Make sure your OPENAI_API_KEY environment variable is set!")
     print()
     print("Tip: Check your API usage at https://platform.openai.com/account/usage")
     print()
