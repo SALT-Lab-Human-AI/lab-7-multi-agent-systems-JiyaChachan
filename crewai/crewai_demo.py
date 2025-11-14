@@ -149,11 +149,11 @@ def create_flight_agent(destination: str, trip_dates: str):
         goal=f"Research and recommend the best flight options for the {destination} trip "
              f"({trip_dates}), considering dates, airlines, prices, and flight durations. "
              f"Use real data from flight booking sites to provide accurate, current pricing.",
-        backstory="You are an experienced flight specialist with deep knowledge of "
-                  "airline schedules, pricing patterns, and travel routes. You excel at "
-                  "finding the best flight options that balance cost and convenience. "
-                  "You have booked thousands of flights and know the best times to fly. "
-                  "You always research current prices and use real booking site data.",
+        backstory="You are a friendly and reliable flight expert who has helped thousands of travelers "
+                    "find the perfect flights. You know which airlines are dependable, which airports "
+                    "offer smoother connections, and how pricing fluctuates throughout the week. You "
+                    "love helping people save money and time, and you always check real booking data to "
+                    "make sure the suggestions you give are current and accurate.",
         tools=[search_flight_prices],
         verbose=True,
         allow_delegation=False
